@@ -65,7 +65,7 @@ const SceneTab = (
         backgroundColor: "white",
         flexDirection: "row",
         borderBottomWidth: 1,
-        borderBottomColor: "gray",
+        borderBottomColor: "#dedede",
         height: 40,
       }}
     >

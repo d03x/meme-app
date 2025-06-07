@@ -10,39 +10,10 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 
-const scenes = [{}];
-// const RenderScene = ({ route, scrollHandler }: any) => {
-//   switch (route.key) {
-//     case "media":
-//       return (
-//         <Animated.ScrollView onScroll={scrollHandler}>
-//           <MediaProfileTab />
-//         </Animated.ScrollView>
-//       );
-//       break;
-//     case "posts":
-//       return (
-//         <Animated.ScrollView onScroll={scrollHandler}>
-//           <PostProfileTab />
-//         </Animated.ScrollView>
-//       );
-//       break;
-//     case "followers":
-//       return (
-//         <Animated.ScrollView onScroll={scrollHandler}>
-//           <PostProfileTab />
-//         </Animated.ScrollView>
-//       );
-//       break;
-//     default:
-//       break;
-//   }
-// };
-
 const routes = [
   { key: "media", title: "Media", component: <MediaProfileTab /> },
-  { key: "posts", title: "Posts", component: <MediaProfileTab /> },
-  { key: "followers", title: "Followers", component: <MediaProfileTab /> },
+  { key: "posts", title: "Posts", component: <PostProfileTab /> },
+  { key: "followers", title: "Followers", component: <PostProfileTab /> },
 ];
 
 function AccountTab({ navigation }) {
