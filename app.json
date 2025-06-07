@@ -1,0 +1,25 @@
+{
+  "name": "Socialin",
+  "slug": "socialin-app",
+  "android": {
+    "package": "com.dadandev.socialinapp"
+  },
+  "ios": {
+    "bundleIdentifier": "com.dadandev.socialinapp"
+  },
+  "plugins": [
+    "expo-font",
+    [
+      "expo-splash-screen",
+      {
+        "backgroundColor": "#232323",
+        "image": "./assets/Onest/icons/Instagram_icon.png",
+        "dark": {
+          "image": "./assets/Onest/icons/Instagram_icon.png",
+          "backgroundColor": "#000000"
+        },
+        "imageWidth": 200
+      }
+    ]
+  ]
+}
