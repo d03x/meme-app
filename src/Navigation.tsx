@@ -3,7 +3,6 @@ import About from "@/screens/AboutScreen";
 import HomeScreenTabNavigation from "@/screens/main";
 import { createNativeStackNavigatorWithAuth } from "@/view/sheel/createNativeStackNavigatorWithAuth";
 import { MainTabNavigatorParams } from "@/lib/routes/types";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 const Stack = createNativeStackNavigatorWithAuth<MainTabNavigatorParams>(null);
 function commonScreens(Common: typeof Stack) {
   return (
@@ -13,8 +12,6 @@ function commonScreens(Common: typeof Stack) {
     </>
   );
 }
-const Drawer = createDrawerNavigator();
-
 export function AppNavigation() {
   return (
     <Stack.Navigator

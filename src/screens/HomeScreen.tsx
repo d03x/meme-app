@@ -1,10 +1,20 @@
-import { NavigationProp, StackProps } from "@/lib/routes/types";
-import LayoutSheel from "@/view/LayoutSheel";
-import { Button } from "@react-navigation/elements";
-import { useEffect } from "react";
-import { Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Text } from "@/components/Typography";
+import { StackProps } from "@/lib/routes/types";
+import { useAppDispatch, useAppSelector } from "@/lib/store";
+import { RootState } from "@/stores";
+import { setIsAuthenticated } from "@/stores/feature/auth/authSlice";
+import { Pressable } from "react-native";
 
 export default function HomeScreen(prp: StackProps) {
-  return <Button onPressIn={()=>prp.navigation.popTo("MainTab")}>Login</Button>
+  const increm = useAppSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useAppDispatch();
+  return (
+    <Pressable
+      onPressIn={() => {
+        dispatch(setIsAuthenticated(false));
+      }}
+    >
+      <Text>{increm ? "YA" : "NO"}</Text>
+    </Pressable>
+  );
 }

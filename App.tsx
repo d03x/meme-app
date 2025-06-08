@@ -3,6 +3,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useCallback, useEffect, useRef, useState } from "react";
 import * as Font from "expo-font";
 import * as ScreenOrientation from "expo-screen-orientation";
+import { Provider } from "react-redux";
 import { StatusBar, useColorScheme } from "react-native";
 import {
   NavigationContainer,
@@ -17,8 +18,7 @@ import {
   ReanimatedLogLevel,
 } from "react-native-reanimated";
 import { AppNavigation } from "@/Navigation";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import HomeScreen from "@/screens/HomeScreen";
+import { store as stores } from "@/stores";
 SplashScreen.preventAutoHideAsync();
 SplashScreen.setOptions({
   duration: 1000,
@@ -102,16 +102,18 @@ export default function App() {
   }, [isDarkMode]);
   return (
     <SafeAreaProvider>
-      <GestureHandlerRootView>
-        <NavigationContainer ref={containerRef}>
-          {loading ? (
-            <ActivityIndicator size={40} style={{ flex: 1 }} />
-          ) : (
-            <AppNavigation />
-          )}
-          {renderStatusBar()}
-        </NavigationContainer>
-      </GestureHandlerRootView>
+      <Provider store={stores}>
+        <GestureHandlerRootView>
+          <NavigationContainer ref={containerRef}>
+            {loading ? (
+              <ActivityIndicator size={40} style={{ flex: 1 }} />
+            ) : (
+              <AppNavigation />
+            )}
+            {renderStatusBar()}
+          </NavigationContainer>
+        </GestureHandlerRootView>
+      </Provider>
     </SafeAreaProvider>
   );
 }

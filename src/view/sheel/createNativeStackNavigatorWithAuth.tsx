@@ -20,7 +20,9 @@ import {
   NativeStackView,
 } from "@react-navigation/native-stack";
 import * as React from "react";
-import { View } from "react-native";
+import {  View } from "react-native";
+import LoginView from "../auth/LoginView";
+import { useAppSelector } from "@/lib/store";
 
 function NativeStackNavigator({
   id,
@@ -76,6 +78,10 @@ function NativeStackNavigator({
     [navigation, state.index, state.key]
   );
   const newDescriptors: typeof descriptors = {};
+  const auth = useAppSelector(state=>state.auth.isAuthenticated);
+  if (!auth) {
+    return <LoginView/>
+  }
   for (const key in descriptors) {
     const descriptor = descriptors[key];
     newDescriptors[key] = {
