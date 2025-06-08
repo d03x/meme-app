@@ -6,13 +6,9 @@ import HomeTab from "@/screens/main/HomeScreen";
 import { AccountScreenTab } from "@/screens/main/Account";
 import PostTab from "@/screens/main/PostScreen";
 const Tab = createBottomTabNavigator();
-import {
-  AntDesign,
-  Feather,
-
-} from "@expo/vector-icons";
+import { AntDesign, Feather } from "@expo/vector-icons";
 import About from "@/screens/AboutScreen";
-import React, { memo, useCallback, } from "react";
+import React, { memo, useCallback } from "react";
 import { Pressable, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Image } from "react-native";
@@ -26,33 +22,27 @@ import Animated, {
 } from "react-native-reanimated";
 import { Text } from "@/components/Typography";
 import { PRIMARY_COLOR } from "@/utils/colors";
-
-enum Routes {
-  HOME = "home",
-  ABOUT = "about",
-  PRESENSI = "presensi",
-  POST_TAB = "post-tab",
-  ACCOUNT_TAB = "account-tab",
-}
+import BottomTabBar from "@/components/BottomTabBar";
+import { RoutesEnum } from "@/lib/types/Routes";
 
 const homeTab = [
   {
-    name: Routes.HOME,
+    name: RoutesEnum.HOME,
     title: "Home",
     component: HomeTab,
   },
   {
-    name: Routes.ABOUT,
+    name: RoutesEnum.ABOUT,
     component: About,
     title: "Buat",
   },
   {
-    name: Routes.POST_TAB,
+    name: RoutesEnum.POST_TAB,
     component: PostTab,
     title: "Notifikasi",
   },
   {
-    name: Routes.ACCOUNT_TAB,
+    name: RoutesEnum.ACCOUNT_TAB,
     component: AccountScreenTab,
     title: "Akun",
   },
@@ -75,128 +65,12 @@ export const LeftHeaderContent = memo(function TabHeaderLeft(
     </View>
   );
 });
-const TAB_BAR_HEIGHT = 60;
-const TabBar = memo(
-  ({
-    navigation,
-    renderIcon,
-    descriptors,
-    state,
-  }: BottomTabBarProps & {
-    renderIcon: (key: string, active: boolean) => any;
-  }) => {
-    return (
-      <View
-        style={{
-          flexDirection: "row",
-          height: TAB_BAR_HEIGHT,
-          borderTopWidth: 2,
-          borderTopColor: "#eaeaea",
-        }}
-      >
-        {state.routes.map((e, index) => {
-          const background = useSharedValue(1);
-          const { route, options } = descriptors[e.key];
-          const isFocused = index === state.index;
-          const onFadeIn = () => {
-            background.value = withTiming(1, {
-              duration: 200,
-            });
-          };
-          const onFadeOut = () => {
-            background.value = 0;
-          };
-          const onLongPress = () => {
-            navigation.emit({
-              target: route.key,
-              type: "tabLongPress",
-            });
-          };
-          const onPress = () => {
-            const event = navigation.emit({
-              type: "tabPress",
-              target: route.key,
-              canPreventDefault: true,
-            });
-
-            if (!isFocused && !event.defaultPrevented) {
-              navigation.navigate(route.name, route.params);
-            }
-          };
-          const title: string = (
-            options.title != null
-              ? options.title
-              : options.headerTitle != null
-                ? options.headerTitle
-                : route.name
-          ) as string;
-          const useAnimate = useAnimatedStyle(() => {
-            return {
-              backgroundColor: interpolateColor(
-                background.value,
-                [0, 1],
-                ["rgba(0, 0, 0, 0.1)", "transparent"]
-              ),
-              opacity: interpolate(background.value, [0, 1], [0.7, 1], "clamp"),
-              transform: [
-                {
-                  scale: interpolate(
-                    background.value,
-                    [0, 1],
-                    [0.9, 1],
-                    "clamp"
-                  ),
-                },
-              ],
-            };
-          });
-          let defaultIcon;
-          if (typeof options.tabBarIcon != "undefined") {
-            defaultIcon = options.tabBarIcon({
-              focused: isFocused,
-              color: "black",
-              size: 24,
-            });
-          }
-
-          return (
-            <Animated.View style={[useAnimate, { flex: 1 }]} key={index}>
-              <Pressable
-                style={[
-                  {
-                    overflow: "hidden",
-                    height: "100%",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  },
-                ]}
-                onPressOut={onFadeIn}
-                onPressIn={onFadeOut}
-                onLongPress={onLongPress}
-                onPress={onPress}
-              >
-                {!defaultIcon ? renderIcon(route.name, isFocused) : defaultIcon}
-                <Text
-                  color={isFocused ? PRIMARY_COLOR : "black"}
-                  type={isFocused ? "ExtraBold" : "Thin"}
-                  size={12}
-                >
-                  {title}
-                </Text>
-              </Pressable>
-            </Animated.View>
-          );
-        })}
-      </View>
-    );
-  }
-);
 
 export default function HomeTabNavigation() {
   const renderIconTab = useCallback(
     (key: string, isActive: boolean = false) => {
       switch (key) {
-        case Routes.HOME:
+        case RoutesEnum.HOME:
           return (
             <AntDesign
               size={24}
@@ -205,7 +79,7 @@ export default function HomeTabNavigation() {
             />
           );
           break;
-        case Routes.ABOUT:
+        case RoutesEnum.ABOUT:
           return (
             <Feather
               size={20}
@@ -214,7 +88,7 @@ export default function HomeTabNavigation() {
             />
           );
           break;
-        case Routes.ACCOUNT_TAB:
+        case RoutesEnum.ACCOUNT_TAB:
           return (
             <Feather
               size={24}
@@ -223,7 +97,7 @@ export default function HomeTabNavigation() {
             />
           );
           break;
-        case Routes.POST_TAB:
+        case RoutesEnum.POST_TAB:
           return (
             <Feather
               size={20}
@@ -244,7 +118,9 @@ export default function HomeTabNavigation() {
     <View style={{ flex: 1 }}>
       <StatusBar translucent={false} style="auto" />
       <Tab.Navigator
-        tabBar={(props) => <TabBar {...props} renderIcon={renderIconTab} />}
+        tabBar={(props) => (
+          <BottomTabBar {...props} renderIcon={renderIconTab} />
+        )}
         screenOptions={{
           headerTitle(props) {
             return null;
