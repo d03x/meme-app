@@ -5,12 +5,12 @@ import {
 } from "@react-navigation/native-stack";
 
 export type CommonNavigationParams = {
-  home_screen: undefined;
-  about_screen: undefined;
+  HomeScreen: undefined;
+  AboutScreen: undefined;
 };
 
-export type HomeNavigatorParams = CommonNavigationParams & {
-  home_tab: undefined;
+export type MainTabNavigatorParams = CommonNavigationParams & {
+  MainTab: undefined;
 };
 export type MainTabNavigationParams = CommonNavigationParams & {
     home : undefined,
@@ -18,7 +18,7 @@ export type MainTabNavigationParams = CommonNavigationParams & {
     post:undefined,
 }
 export type AllNavigationProps = CommonNavigationParams & {
-  home_tab: undefined;
+  MainTab: undefined;
 };
 export type NavigationProp = NativeStackNavigationProp<AllNavigationProps>;
 export type StackProps = NativeStackScreenProps<AllNavigationProps>;
