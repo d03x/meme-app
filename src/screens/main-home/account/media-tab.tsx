@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { Text } from "react-native";
 
-export default function MediaProfileTab(){
+export default function MediaTab(){
     return <View>
         <Text>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae esse expedita consectetur. Illum labore similique quia inventore cum accusantium eveniet nihil harum ipsam ipsum aut repudiandae dolor, aperiam optio magnam.

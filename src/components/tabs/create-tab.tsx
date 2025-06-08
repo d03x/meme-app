@@ -6,7 +6,7 @@ import {
   Text,
   useWindowDimensions,
 } from "react-native";
-import { ReactNode } from "react";
+import { memo, ReactNode, useCallback } from "react";
 import Animated from "react-native-reanimated";
 
 const CreateTab = ({
@@ -15,34 +15,48 @@ const CreateTab = ({
   setIndex,
   onScroll,
 }: {
-  routes: any[];
+  routes: Array<{
+    key: string;
+    title: string;
+    component: ReactNode;
+  }>;
   index;
   onScroll: (props: NativeSyntheticEvent<NativeScrollEvent>) => void;
   setIndex: (item) => void;
 }) => {
   const layout = useWindowDimensions();
-
-  const tabBar = (props) => <SceneTab {...props} />;
+  const tabBar = useCallback((props) => <SceneTab {...props} />, []);
+  const renderScene = useCallback(
+    ({ route }: SceneRendererProps & { route: { key: string } }) => {
+      const activeRoute = routes.find((r) => r.key === route.key);
+      if (!activeRoute) {
+        console.log("OK");
+        return null;
+      }
+      return (
+        <Animated.ScrollView
+          overScrollMode={"never"}
+          bounces={false}
+          removeClippedSubviews={true}
+          scrollEventThrottle={16}
+          onScroll={onScroll}
+          key={index}
+        >
+          {activeRoute.component}
+        </Animated.ScrollView>
+      );
+    },
+    []
+  );
   return (
     <TabView
       navigationState={{ index, routes: routes }}
       renderTabBar={tabBar}
-      renderScene={(route) => {
-        const component = routes.map((ea, index) => {
-          if (ea.key === route.route.key) {
-            return (
-              <Animated.ScrollView onScroll={onScroll} key={index}>
-                {ea.component}
-              </Animated.ScrollView>
-            );
-          }
-        });
-        return component;
-      }}
+      renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{ width: layout.width }}
     />
   );
 };
 
-export default CreateTab;
+export default memo(CreateTab);

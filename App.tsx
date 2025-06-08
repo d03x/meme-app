@@ -42,12 +42,19 @@ export default function App() {
   const loadFonts = useCallback(async () => {
     try {
       await Font.loadAsync({
+        Roboto: require("./assets/fonts/roboto/Roboto-Regular.ttf"),
+        RobotoBold: require("./assets/fonts/roboto/Roboto-Bold.ttf"),
+        RobotoMedium: require("./assets/fonts/roboto/Roboto-Medium.ttf"),
+        RobotoLight: require("./assets/fonts/roboto/Roboto-Light.ttf"),
+        RobotoExtraBold: require("./assets/fonts/roboto/Roboto-ExtraBold.ttf"),
+        RobotoSemiBold: require("./assets/fonts/roboto/Roboto-SemiBold.ttf"),
         Onest: require("./assets/Onest/static/Onest-Regular.ttf"),
         OnestBold: require("./assets/Onest/static/Onest-Bold.ttf"),
         OnestExtraBold: require("./assets/Onest/static/Onest-ExtraBold.ttf"),
         OnestLight: require("./assets/Onest/static/Onest-Light.ttf"),
         OnestMedium: require("./assets/Onest/static/Onest-Medium.ttf"),
         OnestSemiBold: require("./assets/Onest/static/Onest-SemiBold.ttf"),
+        OnestThin: require("./assets/Onest/static/Onest-Thin.ttf"),
       });
     } catch (error) {
       console.log(error);
@@ -78,7 +85,7 @@ export default function App() {
           ) : (
             <AppRoot />
           )}
-          <StatusBar translucent={false} style="inverted"/>
+          <StatusBar translucent={true} style="inverted" />
         </NavigationContainer>
       </GestureHandlerRootView>
     </SafeAreaProvider>
