@@ -1,5 +1,5 @@
-import MediaProfileTab from "@screen/main-home/account/media-tab";
-import PostProfileTab from "@screen/main-home/account/post-tab";
+import MediaProfileTab from "@/screens/main/account/media-tab";
+import PostProfileTab from "@/screens/main/account/post-tab";
 import UserInfo from "@/components/profile/user-info";
 import CreateTab from "@/components/tabs/create-tab";
 import React, { useCallback, useEffect, useMemo } from "react";
@@ -9,7 +9,7 @@ import {
   useSharedValue,
 } from "react-native-reanimated";
 
-function AccountTab({ navigation }) {
+function AccountScreenTab({ navigation }) {
   useEffect(() => {
     navigation.setOptions({
       headerShown: false,
@@ -52,4 +52,4 @@ function AccountTab({ navigation }) {
     </View>
   );
 }
-export { AccountTab };
+export { AccountScreenTab };

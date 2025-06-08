@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeTab from "@/screens/main-home/home-tab";
-import {AccountTab} from "@/screens/main-home/account";
-import PostTab from "@/screens/main-home/post-tab";
+import HomeTab from "@/screens/main/home-screen";
+import { AccountScreenTab } from "@/screens/main/account";
+import PostTab from "@/screens/main/post-screen";
 const Tab = createBottomTabNavigator();
 import { Ionicons } from "@expo/vector-icons";
 import About from "@/screens/about-screen";
@@ -29,7 +29,7 @@ const homeTab = [
   },
   {
     name: "account-tab",
-    component: AccountTab,
+    component: AccountScreenTab,
     title: "Account",
     icon: <Ionicons size={24} name="person-circle-outline" />,
   },

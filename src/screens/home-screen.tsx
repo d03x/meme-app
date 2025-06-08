@@ -11,13 +11,7 @@ export default function HomeScreen({ navigation }) {
       >
         Click
       </Button>
-      <Button
-        onPressIn={() => {
-          navigation.push("account");
-        }}
-      >
-        Click
-      </Button>
+     
       <Text>Oke Letsgo</Text>
     </View>
   );
