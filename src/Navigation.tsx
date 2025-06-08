@@ -14,17 +14,9 @@ function commonScreens(Common: typeof Stack) {
 }
 export function AppNavigation() {
   return (
-    <Stack.Navigator
-      screenOptions={{ headerShown: true, animation: "ios_from_left" }}
-      initialRouteName="HomeScreen"
-      id={null}
-    >
+    <Stack.Navigator screenOptions={{ headerShown: true, animation: "ios_from_left" }} initialRouteName="HomeScreen" id={null}>
       {commonScreens(Stack)}
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="MainTab"
-        component={HomeScreenTabNavigation}
-      />
+      <Stack.Screen options={{ headerShown: false }} name="MainTab" component={HomeScreenTabNavigation}/>
     </Stack.Navigator>
   );
 }
