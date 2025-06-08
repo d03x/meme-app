@@ -3,20 +3,22 @@ import * as SplashScreen from "expo-splash-screen";
 import { useCallback, useEffect, useRef, useState } from "react";
 import * as Font from "expo-font";
 import * as ScreenOrientation from "expo-screen-orientation";
-import { StatusBar } from "expo-status-bar";
+import { StatusBar, useColorScheme } from "react-native";
 import {
   NavigationContainer,
   useNavigationContainerRef,
 } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, Platform } from "react-native";
 import { useLogger } from "@react-navigation/devtools";
 import {
   configureReanimatedLogger,
   ReanimatedLogLevel,
 } from "react-native-reanimated";
 import { AppNavigation } from "@/Navigation";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import HomeScreen from "@/screens/HomeScreen";
 SplashScreen.preventAutoHideAsync();
 SplashScreen.setOptions({
   duration: 1000,
@@ -75,7 +77,29 @@ export default function App() {
       }
     })();
   }, [loading]);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const colorScheme = useColorScheme();
+  useEffect(() => {
+    if (colorScheme === "dark") {
+      setIsDarkMode(true);
+    } else {
+      setIsDarkMode(false);
+    }
+  }, [colorScheme]);
+  const renderStatusBar = useCallback(() => {
+    const barStyle = isDarkMode ? "light-content" : "dark-content";
+    const bg = isDarkMode ? "black" : "white";
 
+    return (
+      <>
+        {Platform.OS === "ios" ? (
+          <StatusBar barStyle={barStyle} />
+        ) : (
+          <StatusBar backgroundColor={bg} barStyle={barStyle} />
+        )}
+      </>
+    );
+  }, [isDarkMode]);
   return (
     <SafeAreaProvider>
       <GestureHandlerRootView>
@@ -85,7 +109,7 @@ export default function App() {
           ) : (
             <AppNavigation />
           )}
-          <StatusBar translucent={true} style="inverted" />
+          {renderStatusBar()}
         </NavigationContainer>
       </GestureHandlerRootView>
     </SafeAreaProvider>

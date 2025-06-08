@@ -1,7 +1,7 @@
-import MediaProfileTab from "@/screens/main/account/media-tab";
-import PostProfileTab from "@/screens/main/account/post-tab";
+import MediaProfileTab from "@/screens/main/Account/media-tab";
+import PostProfileTab from "@/screens/main/Account/post-tab";
 import UserInfo from "@/components/profile/user-info";
-import CreateTab from "@/components/tabs/create-tab";
+import CreateTab from "@/components/tabs/CreateTab";
 import React, { useCallback, useEffect, useMemo } from "react";
 import { View } from "react-native";
 import {

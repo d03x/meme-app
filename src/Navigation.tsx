@@ -1,8 +1,9 @@
-import HomeScreen from "@screen/home-screen";
-import About from "@screen/about-screen";
+import HomeScreen from "@screen/HomeScreen";
+import About from "@/screens/AboutScreen";
 import HomeScreenTabNavigation from "@/screens/main";
 import { createNativeStackNavigatorWithAuth } from "@/view/sheel/createNativeStackNavigatorWithAuth";
 import { MainTabNavigatorParams } from "@/lib/routes/types";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 const Stack = createNativeStackNavigatorWithAuth<MainTabNavigatorParams>(null);
 function commonScreens(Common: typeof Stack) {
   return (
@@ -12,11 +13,22 @@ function commonScreens(Common: typeof Stack) {
     </>
   );
 }
+const Drawer = createDrawerNavigator();
+
 export function AppNavigation() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: true, animation: "ios_from_left" }} initialRouteName="HomeScreen" id={null}>
+    <Stack.Navigator
+      screenOptions={{ headerShown: false, animation: "ios_from_left" }}
+      initialRouteName="HomeScreen"
+      id={null}
+    >
       {commonScreens(Stack)}
-      <Stack.Screen options={{ headerShown: false }} name="MainTab" component={HomeScreenTabNavigation}/>
+
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="MainTab"
+        component={HomeScreenTabNavigation}
+      />
     </Stack.Navigator>
   );
 }

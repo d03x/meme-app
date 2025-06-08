@@ -1,5 +1,5 @@
 import { SceneRendererProps, TabView } from "react-native-tab-view";
-import SceneTab from "./scene-tabs";
+import SceneTab from "./SceneTab";
 import {
   NativeScrollEvent,
   NativeSyntheticEvent,

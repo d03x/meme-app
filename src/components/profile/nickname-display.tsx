@@ -1,5 +1,5 @@
 import { PRIMARY_COLOR } from "@/utils/colors";
-import { Text } from "../typography";
+import { Text } from "../Typography";
 import { Ionicons } from "@expo/vector-icons";
 import { View } from "react-native";
 type NicknameProps = {

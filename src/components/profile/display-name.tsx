@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { Text } from "../typography";
+import { Text } from "../Typography";
 import { Ionicons } from "@expo/vector-icons";
 import { Verified } from "../icons/verified";
 

@@ -1,7 +1,7 @@
-import IconButton from "@/components/icon-button";
+import IconButton from "@/components/IconButton";
 import DisplayName from "@/components/profile/display-name";
 import NicknameDisplay from "@/components/profile/nickname-display";
-import { Text } from "@/components/typography";
+import { Text } from "@/components/Typography";
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, StyleSheet, View } from "react-native";
 import Animated, {
