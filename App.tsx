@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import * as Font from "expo-font";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { StatusBar } from "expo-status-bar";
-import AppRoot from "@/AppRoot";
 import {
   NavigationContainer,
   useNavigationContainerRef,
@@ -17,6 +16,7 @@ import {
   configureReanimatedLogger,
   ReanimatedLogLevel,
 } from "react-native-reanimated";
+import { AppNavigation } from "@/Navigation";
 SplashScreen.preventAutoHideAsync();
 SplashScreen.setOptions({
   duration: 1000,
@@ -83,7 +83,7 @@ export default function App() {
           {loading ? (
             <ActivityIndicator size={40} style={{ flex: 1 }} />
           ) : (
-            <AppRoot />
+            <AppNavigation />
           )}
           <StatusBar translucent={true} style="inverted" />
         </NavigationContainer>
