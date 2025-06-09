@@ -9,6 +9,7 @@ import Animated, {
   Extrapolation,
   interpolate,
   useAnimatedStyle,
+  withSpring,
   withTiming,
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -41,9 +42,10 @@ export default function UserInfo({ scrollY }: any) {
     );
 
     return {
-      height: withTiming(height, {
-        easing: Easing.out(Easing.ease),
-        duration: 200,
+      height: withSpring(height, {
+        damping: 10,
+        stiffness: 300,
+        overshootClamping: true,
       }),
     };
   });

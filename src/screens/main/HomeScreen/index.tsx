@@ -15,7 +15,7 @@ export default function HomeScreenTab() {
   const navigation = useNavigation<AppNativeStackScreenProps["navigation"]>();
   return (
     <MainLayout>
-      <View
+      {/* <View
         style={{
           backgroundColor: "white",
           flexDirection: "row",
@@ -96,7 +96,7 @@ export default function HomeScreenTab() {
             );
           })}
         </ScrollView>
-      </View>
+      </View> */}
       <View>
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero nobis
