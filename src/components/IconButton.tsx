@@ -1,4 +1,4 @@
-import { Pressable } from "react-native";
+import { Pressable, View } from "react-native";
 import Animated, {
   interpolate,
   interpolateColor,
@@ -10,16 +10,19 @@ import Animated, {
 } from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
 import { memo } from "react";
+import { Text } from "./Typography";
 
 interface IconButtonProps {
   icon: React.ReactNode;
   size?: number;
   color?: string;
+  badge?:string,
   onPress?: () => void;
   style?: any;
 }
 
 const IconButton = ({
+  badge,
   icon,
   size = 28,
   color = "#333",
@@ -103,11 +106,30 @@ const IconButton = ({
       delayLongPress={300}
       style={[{ position: "relative" }, style]}
     >
+
+      {badge&&  <View
+        style={{
+          borderRadius: 100,
+          width: 20,
+          top: 2,
+          zIndex:1,
+          borderWidth:2,
+          borderColor:"white",
+          right:3,
+          alignItems:"center",
+          justifyContent:"center",
+          aspectRatio: 1 / 1,
+          backgroundColor: 'red',
+          position: "absolute",
+        }}
+      >
+        <Text size={9} color="white">{badge}</Text>
+      </View>}
       <Animated.View
         style={[
           {
-            aspectRatio:1/1,
-            width: size*1.50,
+            aspectRatio: 1 / 1,
+            width: size * 1.5,
             borderRadius: size * 1.75,
             alignItems: "center",
             justifyContent: "center",

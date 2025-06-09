@@ -41,7 +41,7 @@ const AppHeader = memo(() => {
         >
           <IconButton icon={<Feather name="search" size={25} />} />
           <IconButton icon={<Feather name="user-plus" size={25} />} />
-          <IconButton icon={<Feather name="bell" size={25} />} />
+          <IconButton badge="4" icon={<Feather name="bell" size={25} />} />
           <IconButton icon={<Feather name="compass" size={25} />} />
         </View>
       </View>
