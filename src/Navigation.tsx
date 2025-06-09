@@ -18,7 +18,11 @@ function commonScreens(Common: typeof Stack) {
 export function AppNavigation() {
   return (
     <Stack.Navigator
-      screenOptions={{ headerShown: false, animation: "ios_from_left" }}
+      screenOptions={{
+        headerShown: false,
+        statusBarAnimation: "slide",
+        animation: "ios_from_left",
+      }}
       initialRouteName={AppScreens.MAIN_TAB}
       id={null}
     >

@@ -88,8 +88,8 @@ export default function App() {
     }
   }, [colorScheme]);
   const renderStatusBar = useCallback(() => {
-    const barStyle = isDarkMode ? "light-content" : "dark-content";
-    const bg = isDarkMode ? "black" : "white";
+    const barStyle = isDarkMode ? "dark-content" : "light-content";
+    const bg = isDarkMode ? "transparent" : "transparent";
 
     return (
       <>

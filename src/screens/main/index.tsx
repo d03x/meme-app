@@ -6,7 +6,7 @@ import HomeTab from "@/screens/main/HomeScreen";
 import { AccountScreenTab } from "@/screens/main/Account";
 import PostTab from "@/screens/main/PostScreen";
 const Tab = createBottomTabNavigator();
-import { AntDesign, Feather } from "@expo/vector-icons";
+import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
 import About from "@/screens/AboutScreen";
 import React, { memo, useCallback } from "react";
 import { Pressable, View } from "react-native";
@@ -23,26 +23,26 @@ import Animated, {
 import { Text } from "@/components/Typography";
 import { PRIMARY_COLOR } from "@/utils/colors";
 import BottomTabBar from "@/components/BottomTabBar";
-import { RoutesEnum } from "@/lib/types/Routes";
+import { AppScreens } from "@/navigation/AppNavigation/AppScreens";
 
 const homeTab = [
   {
-    name: RoutesEnum.HOME,
+    name: AppScreens.HOME_SCREEN,
     title: "Home",
     component: HomeTab,
   },
   {
-    name: RoutesEnum.ABOUT,
+    name: AppScreens.ABOUT_SCREEN,
     component: About,
     title: "Buat",
   },
   {
-    name: RoutesEnum.POST_TAB,
+    name: AppScreens.POST_SCREEN,
     component: PostTab,
-    title: "Notifikasi",
+    title: "Explore",
   },
   {
-    name: RoutesEnum.ACCOUNT_TAB,
+    name: AppScreens.ACCOUNT_SCREEN,
     component: AccountScreenTab,
     title: "Akun",
   },
@@ -70,7 +70,7 @@ export default function HomeTabNavigation() {
   const renderIconTab = useCallback(
     (key: string, isActive: boolean = false) => {
       switch (key) {
-        case RoutesEnum.HOME:
+        case AppScreens.HOME_SCREEN:
           return (
             <AntDesign
               size={24}
@@ -79,7 +79,7 @@ export default function HomeTabNavigation() {
             />
           );
           break;
-        case RoutesEnum.ABOUT:
+        case AppScreens.ABOUT_SCREEN:
           return (
             <Feather
               size={20}
@@ -88,7 +88,7 @@ export default function HomeTabNavigation() {
             />
           );
           break;
-        case RoutesEnum.ACCOUNT_TAB:
+        case AppScreens.ACCOUNT_SCREEN:
           return (
             <Feather
               size={24}
@@ -97,12 +97,12 @@ export default function HomeTabNavigation() {
             />
           );
           break;
-        case RoutesEnum.POST_TAB:
+        case AppScreens.POST_SCREEN:
           return (
             <Feather
               size={20}
               color={isActive ? PRIMARY_COLOR : "gray"}
-              name="bell"
+              name="compass"
             />
           );
 
@@ -116,16 +116,13 @@ export default function HomeTabNavigation() {
 
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar translucent={false} style="auto" />
+      <StatusBar translucent={true} style="light" />
       <Tab.Navigator
         tabBar={(props) => (
           <BottomTabBar {...props} renderIcon={renderIconTab} />
         )}
         screenOptions={{
-          headerTitle(props) {
-            return null;
-          },
-          headerLeft: (props) => <LeftHeaderContent {...props} />,
+          headerShown: false,
         }}
         id={null}
       >
