@@ -1,6 +1,6 @@
 "strict";
 import * as SplashScreen from "expo-splash-screen";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect,  useState } from "react";
 import * as Font from "expo-font";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { Provider } from "react-redux";
@@ -19,6 +19,7 @@ import {
 } from "react-native-reanimated";
 import { AppNavigation } from "@/Navigation";
 import { store as stores } from "@/stores";
+import LinkingConfiguration from "@/navigation/AppNavigation/LinkConfiguration";
 SplashScreen.preventAutoHideAsync();
 SplashScreen.setOptions({
   duration: 1000,
@@ -100,11 +101,21 @@ export default function App() {
       </>
     );
   }, [isDarkMode]);
+
+  const handleNaivgationStateChange = () => {
+    const currentRoute = containerRef.current.getCurrentRoute().name;
+    console.log(`Current Route: ${currentRoute}`);
+  };
+
   return (
     <SafeAreaProvider>
       <Provider store={stores}>
         <GestureHandlerRootView>
-          <NavigationContainer ref={containerRef}>
+          <NavigationContainer
+            onStateChange={handleNaivgationStateChange}
+            linking={LinkingConfiguration}
+            ref={containerRef}
+          >
             {loading ? (
               <ActivityIndicator size={40} style={{ flex: 1 }} />
             ) : (
